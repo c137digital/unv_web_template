@@ -15,12 +15,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'unv_template'
+project = 'unv_web_template'
 copyright = '2019, change'
 author = 'change'
 
 # The short X.Y version
-version = ''
+version = '0.1'
 # The full version, including alpha/beta/rc tags
 release = '0.1'
 
@@ -106,7 +106,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'unv_templatedoc'
+htmlhelp_basename = 'unv_web_templatedoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -133,7 +133,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'unv_template.tex', 'unv\\_template Documentation',
+    (master_doc, 'unv_web_template.tex', 'unv\\_template Documentation',
      'change', 'manual'),
 ]
 
@@ -143,7 +143,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'unv_template', 'unv_template Documentation',
+    (master_doc, 'unv_web_template', 'unv_web_template Documentation',
      [author], 1)
 ]
 
@@ -154,8 +154,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'unv_template', 'unv_template Documentation',
-     author, 'unv_template', 'One line description of project.',
+    (master_doc, 'unv_web_template', 'unv_web_template Documentation',
+     author, 'unv_web_template', 'One line description of project.',
      'Miscellaneous'),
 ]
 

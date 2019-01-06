@@ -1,7 +1,8 @@
 from setuptools import setup, find_packages
 
+
 setup(
-    name='package',
+    name='app',
     version='0.1',
     description="""Provide description""",
     url='http://github.com/',
@@ -26,6 +27,7 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages('src'),
     install_requires=[
+        'unv.app==0.1'
     ],
     zip_safe=True
 )
