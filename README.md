@@ -13,6 +13,8 @@
 
 ## What you need to change
 
+To run application you need "Vagrant", so your environment will be identical to production
+
 - package name to whatever you want
 - setup.py
   - name
