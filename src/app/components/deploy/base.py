@@ -1,7 +1,8 @@
 BASE_COMPONENTS = {
     'app': {
         'sync': {
-            'dirs': ['dist']
+            'dirs': ['dist'],
+            'exclude': [],
         },
         'build': [
             'pip install *.tar.gz'

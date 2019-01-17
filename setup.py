@@ -27,7 +27,8 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages('src'),
     install_requires=[
-        'unv.app==0.1'
+        'unv.app==0.1',
+        'unv.deploy==0.1'
     ],
     zip_safe=True
 )
