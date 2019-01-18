@@ -1,3 +1,3 @@
-# TODO: filter dublicated tasks
+from unv.deploy.tasks.remote import dev, prod  # noqa
 
-from .app import *
+from . import app  # noqa
