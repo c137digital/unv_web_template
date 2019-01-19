@@ -1,3 +1,3 @@
-from unv.deploy.tasks.remote import dev, prod  # noqa
+from unv.deploy.tasks.remote import load, host  # noqa
 
 from . import app  # noqa

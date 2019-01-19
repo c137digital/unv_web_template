@@ -1,6 +1,19 @@
-from fabric.api import task
+from fabric.api import task, run
 
 
 @task
-def echo():
-    print('test')
+def setup():
+    # TODO: build python using helpers
+    run('echo "Setup"')
+
+
+@task
+def sync():
+    # TODO: sync source code and reinstall package
+    run('echo "Syncing"')
+
+
+@task
+def start():
+    # TODO: start systemd daemon or other process
+    run('echo "Starting"')

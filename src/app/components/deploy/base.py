@@ -1,10 +1,11 @@
 BASE_COMPONENTS = {
     'app': {
+        'user': 'vagrant',
         'sync': {
             'dirs': ['dist'],
             'exclude': [],
         },
-        'build': [
+        'setup': [
             'pip install *.tar.gz'
         ],
         'systemd': {
