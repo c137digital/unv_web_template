@@ -8,7 +8,7 @@ from unv.app.fabric import load_components_tasks, local_task
 load_components_tasks()
 
 DEPLOY_SETTINGS_SHORTCUTS = {
-    'dev': 'app.components.deploy.development',
+    'dev': 'app.components.deploy.settings.development',
     'prod': 'secure.deploy.production'
 }
 
