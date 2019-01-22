@@ -5,5 +5,6 @@ BASE_SETTINGS = {
             'app.components.example',
             'app.components.deploy'
         ]
-    }
+    },
+    'deploy': {}
 }

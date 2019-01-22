@@ -1,10 +1,19 @@
-from fabric.api import task, run
+import pathlib
+
+from unv.deploy.helpers.core import (
+    task, run, create_user, copy_ssh_key_for_user
+)
+from unv.deploy.helpers.packages import build_python
+
+from ..settings import SETTINGS
 
 
 @task
 def setup():
-    # TODO: build python using helpers
-    run('echo "Setup"')
+    create_user(SETTINGS['app']['user'])
+    copy_ssh_key_for_user(
+        SETTINGS['app']['user'], pathlib.Path(SETTINGS['keys']['public']))
+    build_python(pathlib.Path(SETTINGS['app']['python']['path']))
 
 
 @task
