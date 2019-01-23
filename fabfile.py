@@ -8,29 +8,24 @@ from unv.app.fabric import load_components_tasks, local_task
 load_components_tasks()
 
 DEPLOY_SETTINGS_SHORTCUTS = {
-    'dev': 'app.components.deploy.settings.development',
-    'prod': 'secure.deploy.production'
+    'dev': 'app.settings.development',
+    'prod': 'secure.settings.production'
 }
 
 
 @local_task
 def run():
-    local('vagrant up')
+    local('vagrant reload')
     # check if we have initial setup
     # local('dep dev setup')
     local('dev app.sync app.start')
 
 
 def process_deployment_commands(args):
-    hosts = ','.join([
-        part.lstrip('host:') for part in args if part.startswith('host:')])
     settings, component, *actions = args
     settings = DEPLOY_SETTINGS_SHORTCUTS.get(settings, settings)
     actions = ' '.join([f'deploy.{component}.{action}' for action in actions])
-    os.system(
-        f"fab deploy.load:{settings},{component} "
-        f"deploy.host:{hosts} {actions}"
-    )
+    os.system(f"SETTINGS={settings} fab deploy.take:{component} {actions}")
 
 
 if __name__ == '__main__':

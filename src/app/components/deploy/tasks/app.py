@@ -1,28 +1,42 @@
-import pathlib
+from pathlib import Path
 
-from unv.deploy.helpers.core import (
-    task, run, create_user, copy_ssh_key_for_user
+from unv.deploy.helpers import (
+    task, run, create_user, copy_ssh_key_for_user, as_user
 )
-from unv.deploy.helpers.packages import build_python
+from unv.deploy.packages import python
+from unv.deploy.settings import SETTINGS
 
-from ..settings import SETTINGS
+
+def setup_vagrant():
+    run('sudo passwd root')
+    copy_ssh_key_for_user('root', Path(SETTINGS['keys']['public']))
 
 
 @task
 def setup():
-    create_user(SETTINGS['app']['user'])
-    copy_ssh_key_for_user(
-        SETTINGS['app']['user'], pathlib.Path(SETTINGS['keys']['public']))
-    build_python(pathlib.Path(SETTINGS['app']['python']['path']))
+    user = SETTINGS['components']['app']['user']
+    as_user('vagrant', setup_vagrant)()
+    create_user(user)
+    copy_ssh_key_for_user(user, Path(SETTINGS['keys']['public']))
+    python.build(Path('/home/', user, 'python'))
 
 
-@task
-def sync():
-    # TODO: sync source code and reinstall package
-    run('echo "Syncing"')
+# @task
+# def sync():
+    # sync_dir()
 
 
-@task
-def start():
+# @task
+# def start():
     # TODO: start systemd daemon or other process
-    run('echo "Starting"')
+    # run('echo "Starting"')
+
+
+# @task
+# def stop():
+#     pass
+
+
+# @task
+# def restart():
+#     pass
