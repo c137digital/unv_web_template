@@ -1,0 +1,20 @@
+[Unit]
+Description=unv_web_template Web application
+After=network.target
+Requires=app.target
+
+[Service]
+Type=simple
+User=app
+Group=app
+// or use real python
+ExecStart={{ python.run('') }}
+LimitNOFILE=1000
+
+Environment=SETTINGS=secure.settings.production
+
+Environment=OVERRIDE_SETTINGS_APP_PORT={{ SETTINGS['web']['port'] + INSTANCE }}
+Environment=OVERRIDE_SETTINGS_APP_LOGGING_HANDLERS_FILE_FILENAME=app.{{ INSTANCE }}.log
+
+[Install]
+WantedBy=multi-user.target app.target

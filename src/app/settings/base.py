@@ -25,7 +25,6 @@ BASE_SETTINGS = {
                 'user': 'unv_web_template',
                 'python': {
                     'root': '/home/unv_web_template/python',
-                    'venv': '/home/unv_web_template/venv'
                 },
                 'systemd': {
                     'main': 'app.target',
