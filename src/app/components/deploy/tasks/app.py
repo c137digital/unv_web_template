@@ -2,7 +2,7 @@ from pathlib import Path
 
 from unv.deploy.helpers import (
     task, run, create_user, copy_ssh_key_for_user, as_user, sync_dir, local,
-    put, upload_template
+    put, upload_template, as_root, mkdir
 )
 from unv.deploy.packages import python
 from unv.deploy.settings import SETTINGS
@@ -24,6 +24,7 @@ def setup_vagrant():
 
 
 @task
+@as_user(APP_SETTINGS['user'])
 def setup():
     setup_vagrant()
     create_user(APP_SETTINGS['user'])
@@ -53,16 +54,20 @@ def sync_configs():
 
 
 @task
+@as_user(APP_SETTINGS['user'])
 def sync():
     project_dir = Path(__file__).parents[5]
+
+    mkdir('app')
     sync_dir(project_dir / 'src', Path('app', 'src'))
     put(project_dir / 'setup.py', Path('app', 'setup.py'))
 
     with python.use(PYTHON_SETTINGS):
-        python.pip('install -e .')
+        python.pip('install -e app')
 
 
 @task
+@as_user(APP_SETTINGS['user'])
 def start():
     run('echo "Starting"')
 
@@ -77,19 +82,19 @@ def start():
 #     pass
 
 
-def get_upstream_servers():
-    for _, host in filter_hosts('app'):
-        ssh_host = '{}:{}'.format(host['public'], host['ssh'])
-        instances = SETTINGS['web'].get('instances', 1)
-        if callable(instances):
-            instances = execute_on_hosts(
-                hosts=[ssh_host],
-                task=instances,
-                user=ENV.COMPONENTS['app']['user']
-            )
-        else:
-            instances = {ssh_host: instances}
-        for instance in range(instances[ssh_host]):
-            yield '{}:{}'.format(
-                host['private'], SETTINGS['web']['port'].format(instance)
-            )
+# def get_upstream_servers():
+#     for _, host in filter_hosts('app'):
+#         ssh_host = '{}:{}'.format(host['public'], host['ssh'])
+#         instances = SETTINGS['web'].get('instances', 1)
+#         if callable(instances):
+#             instances = execute_on_hosts(
+#                 hosts=[ssh_host],
+#                 task=instances,
+#                 user=ENV.COMPONENTS['app']['user']
+#             )
+#         else:
+#             instances = {ssh_host: instances}
+#         for instance in range(instances[ssh_host]):
+#             yield '{}:{}'.format(
+#                 host['private'], SETTINGS['web']['port'].format(instance)
+#             )
