@@ -8,6 +8,9 @@ BASE_SETTINGS = {
             'app.components.deploy',
         ]
     },
+    'web': {
+        'port': 8000,
+    },
     'deploy': {
         'keys': {
             'public': '~/.ssh/id_rsa.pub',
@@ -23,6 +26,7 @@ BASE_SETTINGS = {
         'components': {
             'app': {
                 'user': 'unv_web_template',
+                'instances': 4,
                 'python': {
                     'root': '/home/unv_web_template/python',
                 },

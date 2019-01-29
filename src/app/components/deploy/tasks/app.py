@@ -2,14 +2,24 @@ from pathlib import Path
 
 from unv.deploy.helpers import (
     task, run, create_user, copy_ssh_key_for_user, as_user, sync_dir, local,
-    put, upload_template, as_root, mkdir
+    put, upload_template, as_root, mkdir, filter_hosts
 )
 from unv.deploy.packages import python
 from unv.deploy.settings import SETTINGS
 
+from app.settings import SETTINGS as GLOBAL_SETTINGS
+
 
 APP_SETTINGS = SETTINGS['components']['app']
 PYTHON_SETTINGS = SETTINGS['components']['app'].get('python', {})
+
+
+def get_app_instances_hosts():
+    for _, host in filter_hosts(SETTINGS['hosts'], 'app'):
+        for instance in range(APP_SETTINGS['instances']):
+            yield '{}:{}'.format(
+                host['private'], GLOBAL_SETTINGS['web']['port'] + instance
+            )
 
 
 @as_user('vagrant')
@@ -80,21 +90,3 @@ def start():
 # @task
 # def restart():
 #     pass
-
-
-# def get_upstream_servers():
-#     for _, host in filter_hosts('app'):
-#         ssh_host = '{}:{}'.format(host['public'], host['ssh'])
-#         instances = SETTINGS['web'].get('instances', 1)
-#         if callable(instances):
-#             instances = execute_on_hosts(
-#                 hosts=[ssh_host],
-#                 task=instances,
-#                 user=ENV.COMPONENTS['app']['user']
-#             )
-#         else:
-#             instances = {ssh_host: instances}
-#         for instance in range(instances[ssh_host]):
-#             yield '{}:{}'.format(
-#                 host['private'], SETTINGS['web']['port'].format(instance)
-#             )
