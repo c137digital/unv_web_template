@@ -80,13 +80,3 @@ def sync():
 @as_user(APP_SETTINGS['user'])
 def start():
     run('echo "Starting"')
-
-
-# @task
-# def stop():
-#     pass
-
-
-# @task
-# def restart():
-#     pass
