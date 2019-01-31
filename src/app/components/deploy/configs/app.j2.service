@@ -7,14 +7,16 @@ Requires=app.target
 Type=simple
 User=app
 Group=app
-// or use real python
-ExecStart={{ python.run('') }}
+ExecStart={{ python.run('app/bin/server.py', command_only=True) }}
 LimitNOFILE=1000
 
 Environment=SETTINGS=secure.settings.production
 
+# need settings for service 
+# DEPLOY = SETTINGS['deploy]['components]['app']
+
 Environment=OVERRIDE_SETTINGS_APP_PORT={{ SETTINGS['web']['port'] + INSTANCE }}
-Environment=OVERRIDE_SETTINGS_APP_LOGGING_HANDLERS_FILE_FILENAME=app.{{ INSTANCE }}.log
+Environment=OVERRIDE_SETTINGS_APP_LOGGING_HANDLERS_FILE_FILENAME={{ DEPLOY['log'] }} / app.{{ INSTANCE }}.log
 
 [Install]
 WantedBy=multi-user.target app.target

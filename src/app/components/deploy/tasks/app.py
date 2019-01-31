@@ -57,10 +57,13 @@ def sync_configs():
     # configs / app.service
     # configs / app.target -> multiple services
     # configs / nginx as master
+
     upload_template(
-        'configs' / 'app.j2.target', '/etc/systemd/system/unv_web_template/')
+        'configs' / 'app.j2.target', '/etc/systemd/system/{app_name}/',
+        {'get_app_instances_hosts': get_app_instances_hosts}
+    )
     upload_template(
-        'configs' / 'app.j2.service', '/etc/systemd/system/unv_web_template/')
+        'configs' / 'app.j2.service', '/etc/systemd/system/{app_name}/')
 
 
 @task

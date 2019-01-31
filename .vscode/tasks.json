@@ -14,7 +14,7 @@
         {
             "label": "Python: Release package on PyPI",
             "type": "shell",
-            "command": ". activate.sh && python setup.py sdist bdist_wheel && twine upload dist/* -u mortyspace"
+            "command": "rm -rf ./dist && . activate.sh && python setup.py sdist bdist_wheel && twine upload dist/* -u mortyspace"
         },
         {
             "label": "Prospector: Inspect",
