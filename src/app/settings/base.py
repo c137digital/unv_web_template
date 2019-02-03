@@ -20,7 +20,7 @@ BASE_SETTINGS = {
             'vagrant': {
                 'public': '10.50.25.10',
                 'private': '0.0.0.0',
-                'components': ['app', 'iptables']
+                'components': ['app', 'iptables', 'nginx']
             }
         },
         'components': {
@@ -35,6 +35,7 @@ BASE_SETTINGS = {
                 }
             },
             'nginx': {
+                'user': 'nginx',
                 'systemd': {},
             },
             'iptables': {

@@ -1,1 +1,1 @@
-from . import app  # noqa
+from . import app, nginx  # noqa
