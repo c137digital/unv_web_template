@@ -12,6 +12,7 @@ from app.settings import SETTINGS
 DEPLOY = SETTINGS['deploy']
 NGINX = DEPLOY['components']['nginx']
 BUILD_SETTINGS = DEPLOY['components']['nginx'].get('build', {})
+BUILD_SETTINGS.setdefault('user', NGINX['user'])
 
 nginx = NginxPackage(BUILD_SETTINGS)
 
