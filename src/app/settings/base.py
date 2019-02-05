@@ -36,7 +36,25 @@ BASE_SETTINGS = {
             },
             'nginx': {
                 'user': 'nginx',
-                'systemd': {},
+                'master': True,
+                'dir': 'app',
+                'config': {
+                    'name': 'nginx.conf',
+                    'template': 'server.conf'
+                },
+                'include': {
+                    '../app/nginx.conf': 'unv_web_template.conf'
+                },
+                'systemd': {
+                    'dir': 'systemd',
+                    'services': [
+                        {
+                            'name': 'nginx.service',
+                            'template': 'server.service',
+                            'boot': True
+                        }
+                    ]
+                },
             },
             'iptables': {
                 'user': 'root',

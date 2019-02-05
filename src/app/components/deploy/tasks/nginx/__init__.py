@@ -11,10 +11,8 @@ from app.settings import SETTINGS
 
 DEPLOY = SETTINGS['deploy']
 NGINX = DEPLOY['components']['nginx']
-BUILD_SETTINGS = DEPLOY['components']['nginx'].get('build', {})
-BUILD_SETTINGS.setdefault('user', NGINX['user'])
 
-nginx = NginxPackage(BUILD_SETTINGS)
+nginx = NginxPackage(__file__, NGINX)
 
 
 @task
@@ -33,7 +31,8 @@ def setup():
 @as_user(NGINX['user'])
 def sync():
     # project_dir = Path(__file__).parents[5]
-    mkdir('app')
+    # mkdir('app')
+    nginx.sync()
     # upload_template(
     #     'configs' / 'app.j2.service', '/etc/systemd/system/{app_name}/')
 
@@ -41,4 +40,10 @@ def sync():
 @task
 @as_user(NGINX['user'])
 def start():
-    run('echo "Starting"')
+    nginx.start()
+
+
+@task
+@as_user(NGINX['user'])
+def status():
+    nginx.status()

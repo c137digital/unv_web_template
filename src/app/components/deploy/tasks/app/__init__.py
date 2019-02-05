@@ -12,7 +12,7 @@ from app.settings import SETTINGS
 
 APP = DEPLOY['components']['app']
 
-python = PythonPackage(APP.get('python', {}))
+python = PythonPackage(__file__, APP.get('python', {}))
 
 
 def get_app_instances_hosts():
