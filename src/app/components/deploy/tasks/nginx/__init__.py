@@ -47,3 +47,8 @@ def start():
 @as_user(NGINX['user'])
 def status():
     nginx.status()
+
+
+@task
+def restart():
+    nginx.restart()
