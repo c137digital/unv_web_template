@@ -11,15 +11,8 @@
 [![PyPI version fury.io](https://badge.fury.io/py/unv_web_template.svg)](https://pypi.python.org/pypi/unv_web_template/)
 [![PyPI download month](https://img.shields.io/pypi/dm/unv_web_template.svg)](https://pypi.python.org/pypi/unv_web_template/)
 
-## What you need to change
+## Web application template
 
 To run application you need "Vagrant", so your environment will be identical to production
 
-- package name to whatever you want
-- setup.py
-  - name
-  - description
-  - author (git)
-  - email (git)
-  - install_requires + requirements.txt
-  - LICENSE
+Package includes setup for aiohttp application with systemd units.
