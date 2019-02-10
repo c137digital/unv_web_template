@@ -2,25 +2,15 @@ from pathlib import Path
 
 from unv.deploy.helpers import (
     task, run, create_user, copy_ssh_key_for_user, as_user, sync_dir, local,
-    put, upload_template, as_root, mkdir, filter_hosts
+    put, mkdir
 )
 from unv.deploy.packages import PythonPackage
 from unv.deploy.settings import SETTINGS as DEPLOY
-
-from app.settings import SETTINGS
 
 
 APP = DEPLOY['components']['app']
 
 python = PythonPackage(__file__, APP.get('python', {}))
-
-
-def get_app_instances_hosts():
-    for _, host in filter_hosts(DEPLOY['hosts'], 'app'):
-        for instance in range(APP['instances']):
-            yield '{}:{}'.format(
-                host['private'], SETTINGS['web']['port'] + instance
-            )
 
 
 @as_user('vagrant')

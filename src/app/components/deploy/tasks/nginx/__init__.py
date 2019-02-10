@@ -13,10 +13,11 @@ DEPLOY = SETTINGS['deploy']
 NGINX = DEPLOY['components']['nginx']
 
 nginx = NginxPackage(__file__, NGINX)
+as_nginx = as_user(NGINX['user'])
 
 
 @task
-@as_user(NGINX['user'])
+@as_nginx
 def setup():
     create_user(NGINX['user'])
     copy_ssh_key_for_user(NGINX['user'], Path(DEPLOY['keys']['public']))
@@ -28,23 +29,17 @@ def setup():
 
 
 @task
-@as_user(NGINX['user'])
+@as_nginx
 def sync():
-    # project_dir = Path(__file__).parents[5]
-    # mkdir('app')
     nginx.sync()
-    # upload_template(
-    #     'configs' / 'app.j2.service', '/etc/systemd/system/{app_name}/')
 
 
 @task
-@as_user(NGINX['user'])
 def start():
     nginx.start()
 
 
 @task
-@as_user(NGINX['user'])
 def status():
     nginx.status()
 
