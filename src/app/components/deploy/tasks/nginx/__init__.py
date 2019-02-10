@@ -1,8 +1,7 @@
 from pathlib import Path
 
 from unv.deploy.helpers import (
-    task, run, create_user, copy_ssh_key_for_user, as_user, sync_dir, local,
-    put, upload_template, as_root, mkdir, filter_hosts
+    task, create_user, copy_ssh_key_for_user, as_user
 )
 from unv.deploy.packages import NginxPackage
 
