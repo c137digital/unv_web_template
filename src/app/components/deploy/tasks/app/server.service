@@ -1,0 +1,19 @@
+[Unit]
+Description=UNV Web Template
+After=network.target
+
+[Service]
+Type=simple
+User={{ COMPONENT.user }}
+Group={{ COMPONENT.user }}
+ExecStart={{ python.bin('unv_web_template_server', as_os_command=True) }}
+LimitNOFILE=10000
+
+Environment=PYTHONPATH={{ HOME / 'app' }}:$PYTHONPATH
+Environment=SETTINGS={{ HOME / 'secure' / 'settings' }}
+
+Environment=OVERRIDE_SETTINGS_APP_PORT={{ INSTANCE }}
+Environment=OVERRIDE_SETTINGS_APP_LOGGING_HANDLERS_FILE_FILENAME={{ HOME / 'logs' / 'app.log' }}
+
+[Install]
+WantedBy=multi-user.target app.target

@@ -28,10 +28,16 @@ BASE_SETTINGS = {
                 'user': 'unv_web_template',
                 'instances': 4,
                 'python': {
-                    'root': '/home/unv_web_template/python',
+                    'root': 'python',
                 },
                 'systemd': {
-                    'main': 'app.target',
+                    'dir': 'systemd',
+                    'services': [
+                        {
+                            'name': 'unv_web_template_instance.service',
+                            'template': 'instance.service',
+                        }
+                    ]
                 }
             },
             'nginx': {
