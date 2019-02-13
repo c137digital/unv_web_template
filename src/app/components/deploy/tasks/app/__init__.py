@@ -11,6 +11,7 @@ from unv.deploy.settings import SETTINGS as DEPLOY
 APP = DEPLOY['components']['app']
 
 python = PythonPackage(__file__, APP.get('python', {}))
+as_app = as_user('app')
 
 
 @as_user('vagrant')
@@ -25,7 +26,7 @@ def setup_vagrant():
 
 
 @task
-@as_user(APP['user'])
+@as_app
 def setup():
     setup_vagrant()
 
@@ -39,7 +40,7 @@ def setup():
 
 
 @task
-@as_user(APP['user'])
+@as_app
 def sync():
     project_dir = Path(__file__).parents[5]
 
@@ -51,6 +52,6 @@ def sync():
 
 
 @task
-@as_user(APP['user'])
+@as_app
 def start():
     run('echo "Starting"')
