@@ -1,19 +1,18 @@
 [Unit]
-Description=UNV Web Template
+Description={{ COMPONENT.name }}
 After=network.target
 
 [Service]
 Type=simple
 User={{ COMPONENT.user }}
 Group={{ COMPONENT.user }}
-ExecStart={{ python.bin('unv_web_template_server', as_os_command=True) }}
+ExecStart={{ COMPONENT.bin }}
 LimitNOFILE=10000
 
-Environment=PYTHONPATH={{ HOME / 'app' }}:$PYTHONPATH
-Environment=SETTINGS={{ HOME / 'secure' / 'settings' }}
+Environment=SETTINGS={{ COMPONENT.secure_dir }}
 
-Environment=OVERRIDE_SETTINGS_APP_PORT={{ INSTANCE }}
-Environment=OVERRIDE_SETTINGS_APP_LOGGING_HANDLERS_FILE_FILENAME={{ HOME / 'logs' / 'app.log' }}
+Environment=OVERRIDE_SETTINGS_APP_PORT={{ 8000 + INSTANCE }}
+Environment=OVERRIDE_SETTINGS_APP_LOGGING_HANDLERS_FILE_FILENAME={{ COMPONENT.logs_dir / str(8000 + INSTANCE) }}
 
 [Install]
 WantedBy=multi-user.target app.target
