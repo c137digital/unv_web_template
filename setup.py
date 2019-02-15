@@ -30,5 +30,10 @@ setup(
         'unv.app==0.1',
         'unv.deploy==0.1'
     ],
-    zip_safe=True
+    zip_safe=True,
+    entry_points = {
+        'console_scripts': [
+            'unv_web_template_server = app.bin.server:run',
+        ]
+    },
 )
