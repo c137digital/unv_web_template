@@ -1,5 +1,5 @@
 [Unit]
-Description={{ COMPONENT.name }}
+Description=UNV Web Template instance = {{ INSTANCE }}
 After=network.target
 
 [Service]

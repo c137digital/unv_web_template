@@ -34,8 +34,9 @@ BASE_SETTINGS = {
                     'dir': 'systemd',
                     'services': [
                         {
-                            'name': 'unv_web_template_instance.service',
+                            'name': 'unv_web_template_{INSTANCE}.service',
                             'template': 'instance.service',
+                            'boot': True
                         }
                     ]
                 }
