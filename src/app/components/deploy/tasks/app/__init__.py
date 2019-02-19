@@ -12,22 +12,28 @@ APP = DEPLOY['components']['app']
 
 
 class AppPackage(Package):
-    @property
-    def bin(self):
-        pass
-
-    @property
-    def secure_dir(self):
-        pass
-
-    @property
-    def logs_dir(self):
-        pass
+    DEFAULT = {
+        # 'dist': ''
+        # TODO: add settings from sync block
+        'secure_dir': '',
+        'bin': '',
+        'logs_dir': '',
+    }
 
     def setup(self):
         pass
 
+    # def build(self):
+    #     local('python setup.py sdist bdist_wheel')
+    #     # TODO: move to commands from .vscode / tasks.json
+
     def sync(self):
+        # sync data
+        # project_dir = Path(__file__).parents[5]
+        # local('build')
+        # mkdir('secure')
+        # python.pip('install app.tar.gz')
+        # run('rm app.tar.gz')
         pass
 
 
@@ -58,14 +64,6 @@ def setup():
 @as_app
 def sync():
     app.sync()
-
-    # project_dir = Path(__file__).parents[5]
-
-    # mkdir('app')
-    # sync_dir(project_dir / 'src', Path('app', 'src'))
-    # put(project_dir / 'setup.py', Path('app', 'setup.py'))
-
-    # python.pip('install -e app')
 
 
 @task
