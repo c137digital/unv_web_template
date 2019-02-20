@@ -2,7 +2,7 @@ from pathlib import Path
 
 from unv.deploy.helpers import (
     task, run, create_user, as_user, sync_dir, put, mkdir,
-    copy_ssh_key_for_user
+    copy_ssh_key_for_user, local
 )
 from unv.deploy.packages import PythonPackage, VagrantPackage, Package
 from unv.deploy.settings import SETTINGS as DEPLOY
@@ -21,20 +21,21 @@ class AppPackage(Package):
     }
 
     def setup(self):
-        pass
+        put(Path('dist', 'app-0.1.tar.gz'), '')
+        python.pip('install app-0.1.tar.gz')
 
     # def build(self):
     #     local('python setup.py sdist bdist_wheel')
     #     # TODO: move to commands from .vscode / tasks.json
 
-    def sync(self):
+    def build(self):
         # sync data
-        # project_dir = Path(__file__).parents[5]
-        # local('build')
+        project_dir = Path(__file__).parents[5]
+        # local('b')
         # mkdir('secure')
+        local('python setup.py sdist bdist_wheel')
         # python.pip('install app.tar.gz')
         # run('rm app.tar.gz')
-        pass
 
 
 app = AppPackage(__file__, APP)
@@ -46,18 +47,19 @@ as_app = as_user('app')
 @task
 @as_app
 def setup():
-    vagrant.setup()
-
-    app.setup()
-    app.setup_systemd_units()
+    # vagrant.setup()
 
     create_user(APP['user'])
     copy_ssh_key_for_user(APP['user'], Path(DEPLOY['keys']['public']))
 
     python.build()
 
-    sync()
-    start()
+    app.build()
+    app.setup()
+    app.setup_systemd_units()
+
+    # sync()
+    # start()
 
 
 @task
