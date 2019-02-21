@@ -41,13 +41,13 @@ class AppPackage(Package):
 app = AppPackage(__file__, APP)
 python = PythonPackage(__file__, APP.get('python', {}))
 vagrant = VagrantPackage(__file__, DEPLOY)
-as_app = as_user('app')
+as_app = as_user(APP['user'])
 
 
 @task
 @as_app
 def setup():
-    # vagrant.setup()
+    vagrant.setup()
 
     create_user(APP['user'])
     copy_ssh_key_for_user(APP['user'], Path(DEPLOY['keys']['public']))
