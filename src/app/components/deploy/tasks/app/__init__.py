@@ -1,3 +1,5 @@
+import pkg_resources
+
 from pathlib import Path
 
 from unv.deploy.helpers import (
@@ -9,6 +11,8 @@ from unv.deploy.settings import SETTINGS as DEPLOY
 
 
 APP = DEPLOY['components']['app']
+PYTHON = APP.get('python', {})
+PYTHON['user'] = APP['user']
 
 
 class AppPackage(Package):
@@ -16,30 +20,21 @@ class AppPackage(Package):
         # 'dist': ''
         # TODO: add settings from sync block
         'secure_dir': '',
-        'bin': '',
-        'logs_dir': '',
+        'bin': 'unv_web_server'
     }
 
-    def setup(self):
-        put(Path('dist', 'app-0.1.tar.gz'), '')
-        python.pip('install app-0.1.tar.gz')
+    def sync(self):
+        app_pkg = pkg_resources.require('app')
+        version = app_pkg[0].version
 
-    # def build(self):
-    #     local('python setup.py sdist bdist_wheel')
-    #     # TODO: move to commands from .vscode / tasks.json
-
-    def build(self):
-        # sync data
-        project_dir = Path(__file__).parents[5]
-        # local('b')
-        # mkdir('secure')
         local('python setup.py sdist bdist_wheel')
-        # python.pip('install app.tar.gz')
-        # run('rm app.tar.gz')
+        put(Path('dist', f'app-{version}.tar.gz'), '')
+        python.pip(f'install app-{version}.tar.gz')
+        local('rm -rf ./build ./dist')
 
 
 app = AppPackage(__file__, APP)
-python = PythonPackage(__file__, APP.get('python', {}))
+python = PythonPackage(__file__, PYTHON)
 vagrant = VagrantPackage(__file__, DEPLOY)
 as_app = as_user(APP['user'])
 
@@ -54,16 +49,12 @@ def setup():
 
     python.build()
 
-    app.build()
-    app.setup()
+    app.sync()
     app.setup_systemd_units()
-
-    # sync()
-    # start()
+    app.start()
 
 
 @task
-@as_app
 def sync():
     app.sync()
 

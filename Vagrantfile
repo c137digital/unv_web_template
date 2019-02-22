@@ -1,12 +1,12 @@
 Vagrant.configure("2") do |config|
-    config.vm.box = "generic/debian9"
+    config.vm.box = "ubuntu/trusty64"
     config.vm.hostname = "app.local"
     config.vm.network "private_network", ip: "10.50.25.10"
     
     config.vm.provider "virtualbox" do |v|
         v.name = 'unv_web_template'
-        v.memory = 512
-        v.cpus = 1
+        v.memory = 1024
+        v.cpus = 2
     end
 
     ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip

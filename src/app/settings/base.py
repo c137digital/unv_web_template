@@ -27,9 +27,6 @@ BASE_SETTINGS = {
             'app': {
                 'user': 'unv_web_template',
                 'instances': 4,
-                'python': {
-                    'root': 'python',
-                },
                 'systemd': {
                     'dir': 'systemd',
                     'services': [
