@@ -9,3 +9,4 @@ docs/build/
 build/
 dist/
 .vagrant
+/secure

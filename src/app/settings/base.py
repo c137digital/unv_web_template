@@ -25,14 +25,16 @@ BASE_SETTINGS = {
         },
         'components': {
             'app': {
+                'bin': 'unv_web_template_server',
                 'user': 'unv_web_template',
                 'instances': 4,
+                'settings': 'secure.settings',
                 'systemd': {
                     'dir': 'systemd',
                     'services': [
                         {
                             'name': 'unv_web_template_{INSTANCE}.service',
-                            'template': 'instance.service',
+                            'template': 'server.service',
                             'boot': True
                         }
                     ]
