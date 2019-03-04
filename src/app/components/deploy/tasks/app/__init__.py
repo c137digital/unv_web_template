@@ -3,8 +3,7 @@ import pkg_resources
 from pathlib import Path
 
 from unv.deploy.helpers import (
-    task, create_user, as_user, sync_dir, put, mkdir,
-    copy_ssh_key_for_user, local
+    task, create_user, as_user, put, copy_ssh_key_for_user, local
 )
 from unv.deploy.packages import PythonPackage, VagrantPackage, Package
 from unv.deploy.settings import SETTINGS as DEPLOY
@@ -20,6 +19,7 @@ class AppPackage(Package):
         # 'dist': ''
         # TODO: add settings from sync block
         'secure_dir': '',
+        'settings': '',
         'bin': 'unv_web_server'
     }
 
@@ -29,8 +29,8 @@ class AppPackage(Package):
 
         local('python setup.py sdist bdist_wheel')
         put(Path('dist', f'app-{version}.tar.gz'), '')
-        python.pip(f'install app-{version}.tar.gz')
         local('rm -rf ./build ./dist')
+        python.pip(f'install app-{version}.tar.gz')
 
 
 app = AppPackage(__file__, APP)
