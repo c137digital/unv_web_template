@@ -16,8 +16,6 @@ PYTHON['user'] = APP['user']
 
 class AppPackage(Package):
     DEFAULT = {
-        # 'dist': ''
-        # TODO: add settings from sync block
         'secure_dir': '',
         'settings': '',
         'bin': 'unv_web_server'
