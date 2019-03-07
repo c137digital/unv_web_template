@@ -3,14 +3,14 @@ Description=UNV Web Template instance = {{ INSTANCE }}
 After=network.target
 
 [Service]
-Type=fork
+Type=simple
 User={{ COMPONENT.user }}
 Group={{ COMPONENT.user }}
 ExecStart={{ COMPONENT.bin }}
 LimitNOFILE=2000
 
 #Environment=SETTINGS={{ COMPONENT.settings }}
-Environment=OVERRIDE_SETTINGS_APP_PORT={{ 8000 + INSTANCE }}
+Environment=OVERRIDE_SETTINGS_WEB_PORT={{ 8000 + INSTANCE }}
 #Environment=OVERRIDE_SETTINGS_APP_LOGGING_HANDLERS_FILE_FILENAME=
 
 [Install]
