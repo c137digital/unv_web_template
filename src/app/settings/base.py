@@ -8,6 +8,30 @@ BASE_SETTINGS = {
             'app.components.deploy',
         ]
     },
+    'logging': {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'formatters': {
+            'default': {
+                'format': '%(asctime)s - %(levelname)s - %(message)s',
+                'datefmt': '%Y-%m-%d %H:%M:%S'
+            }
+        },
+        'loggers': {
+            '': {
+                'level': 'DEBUG',
+                'handlers': ['file']
+            },
+        },
+        'handlers': {
+            'file': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': '', # override?
+                'formatter': 'default'
+            }
+        }
+    },
     'web': {
         'port': 8000,
     },

@@ -9,9 +9,9 @@ Group={{ COMPONENT.user }}
 ExecStart={{ COMPONENT.bin }}
 LimitNOFILE=2000
 
-#Environment=SETTINGS={{ COMPONENT.settings }}
+Environment=SETTINGS={{ COMPONENT.settings }}
 Environment=OVERRIDE_SETTINGS_WEB_PORT={{ 8000 + INSTANCE }}
-#Environment=OVERRIDE_SETTINGS_APP_LOGGING_HANDLERS_FILE_FILENAME=
+Environment=OVERRIDE_SETTINGS_APP_LOGGING_HANDLERS_FILE_FILENAME=
 
 [Install]
 WantedBy=multi-user.target app.target
