@@ -7,11 +7,13 @@ Type=simple
 User={{ COMPONENT.user }}
 Group={{ COMPONENT.user }}
 ExecStart={{ COMPONENT.bin }}
+WorkingDirectory={{ COMPONENT.home }}
 LimitNOFILE=2000
 
-Environment=SETTINGS={{ COMPONENT.settings }}
-Environment=OVERRIDE_SETTINGS_WEB_PORT={{ 8000 + INSTANCE }}
-Environment=OVERRIDE_SETTINGS_APP_LOGGING_HANDLERS_FILE_FILENAME=
+{% set PORT = 8000 + INSTANCE -%}
+# Environment=SETTINGS={{ COMPONENT.settings }}
+Environment=OVERRIDE_SETTINGS_WEB_PORT={{ PORT }}
+Environment=OVERRIDE_SETTINGS_LOGGING_HANDLERS_FILE_FILENAME={{ COMPONENT.home }}/logs/app.{{ PORT }}.log
 
 [Install]
 WantedBy=multi-user.target app.target

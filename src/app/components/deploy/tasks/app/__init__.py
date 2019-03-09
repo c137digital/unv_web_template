@@ -3,7 +3,8 @@ import pkg_resources
 from pathlib import Path
 
 from unv.deploy.helpers import (
-    task, create_user, as_user, put, copy_ssh_key_for_user, local
+    task, create_user, as_user, put, copy_ssh_key_for_user, local,
+    sync_dir, rmrf
 )
 from unv.deploy.packages import PythonPackage, VagrantPackage, Package
 from unv.deploy.settings import SETTINGS as DEPLOY
@@ -14,8 +15,7 @@ APP = DEPLOY['components']['app']
 
 class AppPackage(Package):
     DEFAULT = {
-        'secure_dir': '',
-        'settings': '',
+        'settings': 'secure.settings',
         'bin': 'unv_web_server'
     }
 
@@ -34,9 +34,14 @@ class AppPackage(Package):
         version = app_pkg[0].version
 
         local('python setup.py sdist bdist_wheel')
-        put(Path('dist', f'app-{version}.tar.gz'), '')
+        package = f'app-{version}.tar.gz'
+        put(Path('dist', package), '')
         local('rm -rf ./build ./dist')
-        self.python.pip(f'install app-{version}.tar.gz')
+
+        self.python.pip(f'install {package}')
+        rmrf(package)
+
+        sync_dir(Path('secure'), Path('secure'))
 
 
 vagrant = VagrantPackage(__file__, DEPLOY)
@@ -61,6 +66,7 @@ def setup():
 @task
 def sync():
     app.sync()
+    app.setup_systemd_units()
 
 
 @task
