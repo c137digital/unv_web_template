@@ -15,7 +15,7 @@ APP = DEPLOY['components']['app']
 
 class AppPackage(Package):
     DEFAULT = {
-        'settings': 'secure.settings',
+        'settings_module': 'secure.settings',
         'bin': 'unv_web_server'
     }
 
@@ -24,6 +24,10 @@ class AppPackage(Package):
         settings = self.settings.get('python', {})
         settings['user'] = self.user
         return PythonPackage(__file__, settings)
+
+    @property
+    def settings_module(self):
+        return self.settings['settings_module']
 
     @property
     def bin(self):
@@ -64,6 +68,7 @@ def setup():
 
 
 @task
+@as_app
 def sync():
     app.sync()
     app.setup_systemd_units()

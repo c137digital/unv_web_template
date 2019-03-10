@@ -11,7 +11,7 @@ WorkingDirectory={{ COMPONENT.home }}
 LimitNOFILE=2000
 
 {% set PORT = 8000 + INSTANCE -%}
-# Environment=SETTINGS={{ COMPONENT.settings }}
+Environment=SETTINGS={{ COMPONENT.settings_module }}
 Environment=OVERRIDE_SETTINGS_WEB_PORT={{ PORT }}
 Environment=OVERRIDE_SETTINGS_LOGGING_HANDLERS_FILE_FILENAME={{ COMPONENT.home }}/logs/app.{{ PORT }}.log
 
