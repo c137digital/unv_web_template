@@ -1,2 +1,5 @@
+from . import views
+
+
 def setup(app):
-    pass
+    app.router.add_get('/', views.index, name='index')

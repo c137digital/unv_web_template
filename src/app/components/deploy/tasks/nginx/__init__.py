@@ -4,11 +4,9 @@ from unv.deploy.helpers import (
     task, create_user, copy_ssh_key_for_user, as_user
 )
 from unv.deploy.packages import NginxPackage
+from unv.deploy.settings import SETTINGS as DEPLOY
 
-from app.settings import SETTINGS
 
-
-DEPLOY = SETTINGS['deploy']
 NGINX = DEPLOY['components']['nginx']
 
 nginx = NginxPackage(__file__, NGINX)

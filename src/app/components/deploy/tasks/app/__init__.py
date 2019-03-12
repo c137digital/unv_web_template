@@ -42,7 +42,7 @@ class AppPackage(Package):
         put(Path('dist', package), '')
         local('rm -rf ./build ./dist')
 
-        self.python.pip(f'install {package}')
+        self.python.pip(f'install -U {package}')
         rmrf(package)
 
         sync_dir(Path('secure'), Path('secure'))
@@ -87,3 +87,8 @@ def stop():
 @task
 def restart():
     app.restart()
+
+
+@task
+def status():
+    app.status()
