@@ -44,20 +44,20 @@ BASE_SETTINGS = {
             'vagrant': {
                 'public': '10.50.25.10',
                 'private': '0.0.0.0',
-                'components': ['app', 'iptables', 'nginx']
+                'components': ['app', 'nginx']
             }
         },
         'components': {
             'app': {
-                'bin': 'unv_web_template_server',
-                'user': 'unv_web_template',
-                'instances': 4,
-                'settings': 'secure.settings',
+                'bin': 'server',
+                'user': 'app',
+                'instances': 2,
+                'settings_module': 'secure.production',
                 'systemd': {
                     'dir': 'systemd',
                     'services': [
                         {
-                            'name': 'unv_web_template_{INSTANCE}.service',
+                            'name': 'app_{INSTANCE}.service',
                             'template': 'server.service',
                             'boot': True
                         }
@@ -73,7 +73,7 @@ BASE_SETTINGS = {
                     'template': 'server.conf'
                 },
                 'include': {
-                    '../app/nginx.conf': 'unv_web_template.conf'
+                    '../app/nginx.conf': 'app.conf'
                 },
                 'systemd': {
                     'dir': 'systemd',
@@ -85,12 +85,6 @@ BASE_SETTINGS = {
                         }
                     ]
                 },
-            },
-            'iptables': {
-                'user': 'root',
-                'systemd': {
-                    ''
-                }
             }
         }
     }

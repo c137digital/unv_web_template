@@ -25,14 +25,15 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages('src'),
     install_requires=[
-        'unv.app==0.2',
-        'unv.web==0.1.2',
-        'unv.deploy==0.1.3'
+        'unv.app==0.2.3',
+        'unv.web==0.1.5',
+        'unv.deploy==0.1.7'
     ],
     zip_safe=True,
     entry_points={
         'console_scripts': [
-            'unv_web_template_server = app.bin.server:run',
+            'server = app.bin.server:run',
+            'shell = app.bin.shell:run'
         ]
     },
 )

@@ -2,6 +2,8 @@ import pkg_resources
 
 from pathlib import Path
 
+from fabric.api import open_shell
+
 from unv.deploy.helpers import (
     task, create_user, as_user, put, copy_ssh_key_for_user, local,
     sync_dir, rmrf
@@ -15,7 +17,7 @@ APP = DEPLOY['components']['app']
 
 class AppPackage(Package):
     DEFAULT = {
-        'settings_module': 'secure.settings',
+        'settings_module': 'secure.production',
         'bin': 'unv_web_server'
     }
 
@@ -70,8 +72,8 @@ def setup():
 @task
 @as_app
 def sync():
-    app.sync()
     app.setup_systemd_units()
+    app.sync()
 
 
 @task
@@ -92,3 +94,9 @@ def restart():
 @task
 def status():
     app.status()
+
+
+@task
+@as_app
+def shell():
+    open_shell('{} && exit'.format(app.python.bin('shell', command_only=True)))

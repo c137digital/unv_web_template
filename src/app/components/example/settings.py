@@ -1,4 +1,4 @@
-from .core import create_component_settings
+from unv.app.core import create_component_settings
 
 SCHEMA = {
     "type": "object",
