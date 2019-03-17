@@ -55,13 +55,12 @@ BASE_SETTINGS = {
                 'settings_module': 'secure.production',
                 'systemd': {
                     'dir': 'systemd',
-                    'services': [
-                        {
+                    'services': {
+                        'server.service': {
                             'name': 'app_{INSTANCE}.service',
-                            'template': 'server.service',
                             'boot': True
                         }
-                    ]
+                    }
                 }
             },
             'nginx': {
@@ -77,14 +76,13 @@ BASE_SETTINGS = {
                 },
                 'systemd': {
                     'dir': 'systemd',
-                    'services': [
-                        {
+                    'services': {
+                        'server.service': {
                             'name': 'nginx.service',
-                            'template': 'server.service',
                             'boot': True
                         }
-                    ]
-                },
+                    }
+                }
             }
         }
     }

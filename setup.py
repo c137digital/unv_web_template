@@ -16,7 +16,6 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
         'Topic :: Software Development :: Libraries :: Application Frameworks',
@@ -24,10 +23,13 @@ setup(
     ],
     package_dir={'': 'src'},
     packages=find_packages('src'),
+    include_package_data=True,
     install_requires=[
         'unv.app==0.2.3',
         'unv.web==0.1.5',
-        'unv.deploy==0.1.7'
+        'unv.deploy==0.1.9',
+
+        'watchgod'
     ],
     zip_safe=True,
     entry_points={

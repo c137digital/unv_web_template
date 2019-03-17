@@ -9,5 +9,12 @@ SETTINGS = create_settings(update_dict_recur(BASE_SETTINGS, {
     },
     'example': {
         'env': 'development'
+    },
+    'deploy': {
+        'components': {
+            'app': {
+                'settings_module': 'app.settings.development'
+            }
+        }
     }
 }))

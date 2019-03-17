@@ -1,24 +1,14 @@
 import os
 import sys
 
-from fabric.api import local
-
-from unv.app.fabric import load_components_tasks, local_task
+from unv.app.fabric import load_components_tasks
 
 load_components_tasks()
 
 DEPLOY_SETTINGS_SHORTCUTS = {
     'dev': 'app.settings.development',
-    'prod': 'secure.settings.production'
+    'prod': 'secure.production'
 }
-
-
-@local_task
-def run():
-    local('vagrant reload')
-    # check if we have initial setup
-    # local('dep dev setup')
-    local('dev app.sync app.start')
 
 
 def process_deployment_commands(args):

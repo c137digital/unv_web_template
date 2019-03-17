@@ -1,6 +1,9 @@
+import asyncio
 import pkg_resources
 
 from pathlib import Path
+
+import watchgod
 
 from fabric.api import open_shell
 
@@ -100,3 +103,17 @@ def status():
 @as_app
 def shell():
     open_shell('{} && exit'.format(app.python.bin('shell', command_only=True)))
+
+
+async def watch_files():
+    async for changed in watchgod.awatch('./src/app'):
+        print(f'changed {changed}')
+
+        app.sync()
+        app.restart()
+
+
+@task
+@as_app
+def watch():
+    asyncio.run(watch_files())

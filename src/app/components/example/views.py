@@ -6,5 +6,6 @@ from unv.web.helpers import url_for_static
 
 
 async def index(request):
-    st = url_for_static('test/1.txt')
-    return web.Response(body=st)
+    st = url_for_static('example/1.txt')
+    test = f'123 {st}'
+    return web.Response(body=test)
