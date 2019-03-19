@@ -1,1 +1,1 @@
-recursive-include src/app/components/*.*
+recursive-include src/app/components/ *.*

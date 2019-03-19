@@ -26,7 +26,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'unv.app==0.2.3',
-        'unv.web==0.1.5',
+        'unv.web==0.1.9',
         'unv.deploy==0.1.10',
 
         'watchgod'
