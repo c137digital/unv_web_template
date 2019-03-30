@@ -5,12 +5,16 @@ Vagrant.configure("2") do |config|
     
     config.vm.provider "virtualbox" do |v|
         v.name = 'unv_web_template'
-        v.memory = 1024
-        v.cpus = 2
+        v.memory = 512
+        v.cpus = 1
+        v.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
     end
 
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+    
     ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
     config.ssh.insert_key = false
+    config.vm.provision 'shell', inline: 'rm -rf /root/.ssh'
     config.vm.provision 'shell', inline: 'mkdir -p /root/.ssh'
     config.vm.provision 'shell',
         inline: "echo #{ssh_pub_key} >> /root/.ssh/authorized_keys"
