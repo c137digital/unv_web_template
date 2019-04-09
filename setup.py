@@ -25,11 +25,9 @@ setup(
     packages=find_packages('src'),
     include_package_data=True,
     install_requires=[
-        'unv.app==0.2.3',
-        'unv.web==0.1.9',
-        'unv.deploy==0.1.10',
-
-        'watchgod'
+        'unv.app',
+        'unv.web',
+        'unv.deploy',
     ],
     zip_safe=True,
     entry_points={
