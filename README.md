@@ -1,5 +1,4 @@
-# Provide Name and Description for package
-
+# Template for typical web application 
 [![Build Status](https://readthedocs.org/projects/unv_web_template/badge/?version=latest&style=flat)](https://readthedocs.org/projects/unv_web_template)
 [![Docs Build Status](https://travis-ci.org/c137digital/unv_web_template.svg?branch=master)](https://travis-ci.org/c137digital/unv_web_template)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d55631dca90a900ce134/maintainability)](https://codeclimate.com/github/c137digital/unv_web_template/maintainability)
