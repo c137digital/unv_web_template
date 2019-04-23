@@ -11,23 +11,28 @@ SETTINGS = create_settings({
     'app': {
         'root': APP_HOME,
     },
-    'example': {
-        'env': 'development'
-    },
     'deploy': {
         'hosts': {
             'vagrant': {
                 'public': '10.50.25.10',
                 'private': '0.0.0.0',
-                'components': ['web']
+                'components': ['app', 'nginx']
             }
         },
         'components': {
-            'web': {
-                'bin': 'server',
+            'app': {
                 'settings': 'app.settings.development',
-                'user': APP_USER
-            }
+                'user': APP_USER,
+                'use_https': False,
+                'systemd': {
+                    'services': {
+                        'app.service': {
+                            'instances': 2
+                        }
+                    }
+                },
+            },
+            'nginx': {'user': 'nginx'}
         }
     }
 }, BASE_SETTINGS)

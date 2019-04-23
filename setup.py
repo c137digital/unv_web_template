@@ -32,8 +32,7 @@ setup(
     zip_safe=True,
     entry_points={
         'console_scripts': [
-            'server = app.bin.server:run',
-            'shell = app.bin.shell:run'
+            'app = app.bin.server:run'
         ]
     },
 )
