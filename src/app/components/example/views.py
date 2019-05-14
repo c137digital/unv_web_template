@@ -6,6 +6,6 @@ from .settings import SETTINGS
 
 
 async def index(request):
-    st = url_for_static('example/1.txt')
-    test = f'123 {st} {SETTINGS["somevar"]}'
+    st = url_for_static('example/2.txt')
+    test = f'130 {st} {SETTINGS["somevar"]}\n'
     return web.Response(body=test)
