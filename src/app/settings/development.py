@@ -6,17 +6,18 @@ SETTINGS = create_settings({
     'deploy': {
         'hosts': {
             'vagrant': {
-                'public': '10.50.25.10',
-                'private': '0.0.0.0',
-                'components': ['web', 'nginx', 'iptables']
+                'public_ip': '10.50.25.11',
+                'private_ip': '10.50.25.11',
+                'port': 22,
+                'components': ['iptables', 'nginx', 'app']
             }
         },
         'components': {
-            'web': {
+            'app': {
                 'settings': 'app.settings.development',
                 'use_https': False,
                 'systemd': {
-                    'instances': {'count': 2}
+                    'instances': {'cpu_count_percent': 100}
                 }
             }
         }

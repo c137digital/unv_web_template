@@ -1,10 +1,7 @@
 Vagrant.configure("2") do |config|
     config.vm.box = "generic/ubuntu1604"
-    config.vm.hostname = "app.local"
-    config.vm.network "private_network", ip: "10.50.25.10"
     
     config.vm.provider "virtualbox" do |v|
-        v.name = 'unv_web_template'
         v.memory = 512
         v.cpus = 2
         v.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
@@ -21,4 +18,12 @@ Vagrant.configure("2") do |config|
     config.vm.provision 'shell',
         inline: "echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys",
         privileged: false
+
+    config.vm.define "app" do |app|
+        app.vm.network "private_network", ip: "10.50.25.10"
+        app.vm.hostname = "unvwebapp"
+        app.vm.provider "virtualbox" do |v|
+            v.name = 'unv_web_app'
+        end
+    end
 end
