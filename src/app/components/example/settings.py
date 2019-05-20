@@ -1,14 +1,17 @@
-from unv.app.core import create_component_settings
+from unv.app.core import ComponentSettings
 
-SCHEMA = {
-    "somevar": {
-        "type": "string",
-        "required": False
+
+class ExampleSettings(ComponentSettings):
+    KEY = 'example'
+    SCHEMA = {
+        "somevar": {
+            "type": "string",
+            "required": False
+        }
     }
-}
+    DEFAULT = {
+        'somevar': 'undefined',
+    }
 
-DEFAULTS = {
-    'somevar': 'undefined',
-}
 
-SETTINGS = create_component_settings('example', DEFAULTS, SCHEMA)
+SETTINGS = ExampleSettings()
