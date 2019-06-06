@@ -5,12 +5,15 @@ from .base import BASE_SETTINGS
 # NOTE: add check you don't import nothing with settings inside
 
 SETTINGS = ComponentSettings.create({
+    'app': {
+        'env': 'dev'
+    },
     'deploy': {
         'tasks': [
             'unv.deploy.components.vagrant:VagrantTasks',
-            'unv.deploy.components.nginx:NginxComponentTasks',
-            'unv.deploy.components.iptables:IPtablesDeployTasks',
-            'unv.web.deploy:WebAppComponentTasks'
+            'unv.deploy.components.nginx:NginxTasks',
+            'unv.deploy.components.iptables:IPtablesTasks',
+            'unv.web.deploy:WebAppTasks'
         ],
         'hosts': {
             'vagrant': {
