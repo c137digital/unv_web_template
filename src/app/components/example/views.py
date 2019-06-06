@@ -8,5 +8,5 @@ from .settings import SETTINGS
 
 async def index(request):
     st = url_for_static('example/2.txt')
-    test = f'131 {st} {DEPLOY_SETTINGS.instance} {SETTINGS._data}\n'
+    test = f'132 {st} {DEPLOY_SETTINGS.instance} {SETTINGS._data}\n'
     return web.Response(body=test)

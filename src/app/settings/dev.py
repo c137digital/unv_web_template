@@ -8,17 +8,19 @@ SETTINGS = ComponentSettings.create({
     'deploy': {
         'tasks': [
             'unv.deploy.components.vagrant:VagrantTasks',
-            'unv.deploy.components.app:AppComponentTasks'
+            'unv.deploy.components.nginx:NginxComponentTasks',
+            'unv.deploy.components.iptables:IPtablesDeployTasks',
+            'unv.web.deploy:WebAppComponentTasks'
         ],
         'hosts': {
             'vagrant': {
                 'public_ip': '10.50.25.10',
-                'components': ['iptables', 'nginx', 'app']
+                'components': ['iptables', 'nginx', 'web']
             }
         },
         'components': {
-            'app': {
-                'settings': 'app.settings.development',
+            'web': {
+                'settings': 'app.settings.dev',
                 'use_https': False,
                 'systemd': {
                     'instances': {'percent': 100}
