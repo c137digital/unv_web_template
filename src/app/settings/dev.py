@@ -13,12 +13,13 @@ SETTINGS = ComponentSettings.create({
             'unv.deploy.components.vagrant:VagrantTasks',
             'unv.deploy.components.nginx:NginxTasks',
             'unv.deploy.components.iptables:IPtablesTasks',
+            'unv.deploy.components.redis:RedisTasks',
             'unv.web.deploy:WebAppTasks'
         ],
         'hosts': {
             'vagrant': {
                 'public_ip': '10.50.25.10',
-                'components': ['iptables', 'nginx', 'web']
+                'components': ['iptables', 'nginx', 'web', 'redis']
             }
         },
         'components': {
@@ -28,6 +29,9 @@ SETTINGS = ComponentSettings.create({
                 'systemd': {
                     'instances': {'percent': 100}
                 }
+            },
+            'nginx': {
+                'geoip2': True
             }
         }
     }
