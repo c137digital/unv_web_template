@@ -8,6 +8,11 @@ SETTINGS = ComponentSettings.create({
     'app': {
         'env': 'dev'
     },
+    'web': {
+        'redis': {
+            'enabled': True
+        },
+    },
     'deploy': {
         'tasks': [
             'unv.deploy.components.vagrant:VagrantTasks',
@@ -28,7 +33,7 @@ SETTINGS = ComponentSettings.create({
                 'use_https': False,
                 'systemd': {
                     'instances': {'percent': 100}
-                }
+                },
             },
             'nginx': {
                 'geoip2': True
