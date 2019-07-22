@@ -4,5 +4,10 @@ BASE_SETTINGS = {
             'unv.web',
             'app.components.example',
         ]
+    },
+    'web': {
+        'redis': {
+            'enabled': True
+        },
     }
 }

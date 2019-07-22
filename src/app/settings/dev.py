@@ -8,11 +8,6 @@ SETTINGS = ComponentSettings.create({
     'app': {
         'env': 'dev'
     },
-    'web': {
-        'redis': {
-            'enabled': True
-        },
-    },
     'deploy': {
         'tasks': [
             'unv.deploy.components.vagrant:VagrantTasks',
