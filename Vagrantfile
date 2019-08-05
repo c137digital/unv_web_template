@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
     
     config.vm.provider "virtualbox" do |v|
         v.memory = 512
-        v.cpus = 2
+        v.cpus = 1
         v.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
     end
 

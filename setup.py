@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='app',
+    name='web_app',
     version='0.1',
     description="""Provide description""",
     url='http://github.com/',
