@@ -20,7 +20,8 @@
         "**/.pytest_cache": true,
         ".coverage": true,
         "cov.xml": true,
-        ".vagrant": true
+        ".vagrant": true,
+        "**/**.egg-info": true
     },
     "files.watcherExclude": {
         "**/.git/**": true,
