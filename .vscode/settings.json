@@ -21,7 +21,8 @@
         ".coverage": true,
         "cov.xml": true,
         ".vagrant": true,
-        "**/**.egg-info": true
+        "**/**.egg-info": true,
+        "**/node_modules": true
     },
     "files.watcherExclude": {
         "**/.git/**": true,
