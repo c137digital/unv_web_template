@@ -12,7 +12,8 @@ SETTINGS = ComponentSettings.create({
         'hosts': {
             'vagrant': {
                 'public_ip': '10.50.25.10',
-                'components': ['iptables', 'nginx', 'web', 'redis']
+                'private_ip': '10.50.25.10',
+                'components': ['iptables', 'nginx', 'web', 'redis'],
             }
         },
         'components': {
