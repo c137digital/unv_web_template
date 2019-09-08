@@ -9,13 +9,6 @@ SETTINGS = ComponentSettings.create({
         'env': 'dev'
     },
     'deploy': {
-        'tasks': [
-            'unv.deploy.components.vagrant:VagrantTasks',
-            'unv.deploy.components.nginx:NginxTasks',
-            'unv.deploy.components.iptables:IPtablesTasks',
-            'unv.deploy.components.redis:RedisTasks',
-            'unv.web.deploy:WebAppTasks'
-        ],
         'hosts': {
             'vagrant': {
                 'public_ip': '10.50.25.10',
