@@ -31,5 +31,8 @@
     },
     "files.insertFinalNewline": true,
     "git.ignoreLimitWarning": true,
+    "files.associations": {
+        "Vagrantfile": "ruby"
+    },
     "restructuredtext.confPath": "${workspaceFolder}/docs/source"
 }
