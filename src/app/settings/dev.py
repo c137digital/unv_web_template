@@ -11,8 +11,8 @@ SETTINGS = ComponentSettings.create({
     'deploy': {
         'hosts': {
             'vagrant': {
-                'public_ip': '10.50.25.10',
-                'private_ip': '10.50.25.10',
+                'public_ip': '10.50.25.31',
+                'private_ip': '10.50.25.31',
                 'components': ['iptables', 'nginx', 'web', 'redis'],
             }
         },
@@ -25,7 +25,7 @@ SETTINGS = ComponentSettings.create({
                 },
             },
             'nginx': {
-                'geoip2': True
+                'geoip2': False
             }
         }
     }
