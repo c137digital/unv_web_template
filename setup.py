@@ -37,9 +37,11 @@ setup(
             'pytest-cov',
             'pytest-env',
             'pytest-pythonpath',
+            'pytest-aiohttp',
             'autopep8',
             'sphinx',
             'setuptools',
+            'wheel',
             'twine'
         ]
     },

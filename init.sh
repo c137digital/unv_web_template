@@ -7,4 +7,4 @@ find . -type d -name '*.egg-info' -exec rm -rf {} +
 source activate.sh
 
 python3 -m pip install --upgrade pip wheel
-python3 -m pip install -e .\[dev\]
+python3 -m pip install -e ".[dev]"
